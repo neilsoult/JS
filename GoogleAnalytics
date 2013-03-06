@@ -1,0 +1,34 @@
+(function ($) {
+  $.loadGA = function (AccountId) {
+		window._gaq = window.gaq || [];
+		window._gaq.push(
+			['_setAccount', AccountId],
+			['_trackPageview']
+		);
+		(function () {
+			var src = ('https:' == document.location.protocol
+					   ? 'https://ssl' : 'http://www')
+				+ '.google-analytics.com/ga.js';
+			var ga = document.createElement('script');
+			ga.type = 'text/javascript';
+			ga.src = src
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(ga, s);
+		})();
+	};
+	$.trackGaEvent = function (category, action) {
+		window._gaq.push(['_trackEvent', category, action]);
+	};
+})(jQuery);
+
+  //
+	// SAMPLE CODE IMPLIMENTATION
+	//
+	$(function () { // page load
+		$.loadGA('UA-XXXXXXXX-X'); //insert GA tracking code
+		//track event sample
+		$('a').click(function (e) { // add click event to all anchor tags
+			e.preventDefault(); // prevent default action
+			$.trackGaEvent('anchor', $(this).attr('href')); // register 'anchor' category, action is the href value
+		});
+	});
