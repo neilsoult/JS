@@ -1,39 +1,37 @@
 (function (w) {
-  function GA () {
-  }
-  GA.prototype.load = function (AccountId) {
-    var _gaq = _gaq || [];
-    _gaq.push(
-  		['_setAccount', AccountId],
-			['_trackPageview']
+    function GA () {}
+    GA.prototype.load = function (AccountId) {
+        var _gaq = _gaq || [];
+        _gaq.push(
+  		    ['_setAccount', AccountId],
+		    ['_trackPageview']
 		);
 		(function () {
-			var src = ('https:' == document.location.protocol
-					   ? 'https://ssl' : 'http://www')
-				+ '.google-analytics.com/ga.js';
+			var src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www')
+		            + '.google-analytics.com/ga.js';
 			var ga = document.createElement('script');
 			ga.type = 'text/javascript';
 			ga.src = src
 			var s = document.getElementsByTagName('script')[0];
 			s.parentNode.insertBefore(ga, s);
 		})();
-  };
-  GA.protype.trackGaEvent = function (category, action) {
-  	window._gaq.push(['_trackEvent', category, action]);
+    };
+    GA.protype.trackGaEvent = function (category, action) {
+        window._gaq.push(['_trackEvent', category, action]);
 	};
-  w.ga = new GA();
+    w.ga = new GA();
 })(window);
 
-	//
+    //
 	// SAMPLE CODE IMPLIMENTATION
 	//
 	window.onload = function () { // page load
-		ga.load('UA-XXXXXXXX-X'); //insert GA tracking code
-		//track event sample
-    var anchors = document.getElementsByTagName('a');
-    anchors.onclick = function (e) { // add click event to all anchor tags
-      var href = e.target ? e.target.href : e.srcElement.href;
-			ga.trackGaEvent('anchor', href); // register 'anchor' category, action is the href value
-  		return false; // prevent default action
-		});
+		ga.load('UA-XXXXXXXX-X'); // insert GA tracking code
+		// track event sample
+        var anchors = document.getElementsByTagName('a');
+        anchors.onclick = function (e) { // add click event to all anchor tags
+            var href = e.target ? e.target.href : e.srcElement.href;
+		    ga.trackGaEvent('anchor', href); // register 'anchor' category, action is the href value
+  	        return false; // prevent default action
+	    };
 	};
